@@ -4,7 +4,7 @@ specMinorVersion: 1
 meta:
   name: nvidia-voice-agent
   image: project-nvidia-voice-agent
-  description: Voice-enabled conversational AI agent with STT/TTS using Riva and Nvidia models
+  description: Voice-enabled conversational AI agent with STT/TTS
   createdOn: "2026-02-05T12:00:00Z"
   defaultBranch: main
 
@@ -25,35 +25,22 @@ environment:
   base:
     registry: nvcr.io
     image: nvidia/ai-workbench/pytorch:1.0.2
+    build_timestamp: "20240101000000"
+    name: PyTorch
     cuda_version: "12.2"
-    name: PyTorch with CUDA 12.2
-    description: PyTorch environment for voice agent development
-    labels:
-      - cuda12.2
-      - pytorch2.1
-    programming_languages:
-      - python3
-    package_managers:
-      - pip
 
   variables:
     NVIDIA_API_KEY:
       description: Nvidia API key for integrate.api
     RIVA_URI:
       value: localhost:50051
-      description: Riva gRPC endpoint for STT/TTS
+      description: Riva gRPC endpoint
     MODEL_NAME:
       value: qwen/qwen3-coder-480b-a35b-instruct
-      description: Nvidia model for conversational AI
-    VOICE_NAME:
-      value: en-US-Neural2-C
-      description: TTS voice name
-    AUDIO_DEVICE_INDEX:
-      value: "0"
-      description: Microphone device index
+      description: Nvidia conversational model
     LOG_LEVEL:
       value: INFO
-      description: Logging level (DEBUG, INFO, WARNING, ERROR)
+      description: Logging level
 
 execution:
   resources:
@@ -66,9 +53,3 @@ execution:
       target: /project/
       description: project directory
       options: rw
-
-  apps:
-    - name: jupyterlab
-      type: web
-      port: 8888
-      description: JupyterLab for interactive development
