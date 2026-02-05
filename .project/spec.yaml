@@ -5,8 +5,6 @@ meta:
   name: nvidia-voice-agent
   image: project-nvidia-voice-agent
   description: Voice-enabled conversational AI agent with STT/TTS
-  createdOn: "2026-02-05T12:00:00Z"
-  defaultBranch: main
 
 layout:
   - path: code/
@@ -20,36 +18,23 @@ layout:
     storage: gitlfs
 
 environment:
-  compose_file_path: compose.yaml
-
   base:
     registry: nvcr.io
     image: nvidia/ai-workbench/pytorch:1.0.2
-    build_timestamp: "20240101000000"
-    name: PyTorch
     cuda_version: "12.2"
 
   variables:
     NVIDIA_API_KEY:
-      description: Nvidia API key for integrate.api
+      description: Nvidia API key
     RIVA_URI:
       value: localhost:50051
-      description: Riva gRPC endpoint
     MODEL_NAME:
       value: qwen/qwen3-coder-480b-a35b-instruct
-      description: Nvidia conversational model
     LOG_LEVEL:
       value: INFO
-      description: Logging level
 
 execution:
-  resources:
-    gpu:
-      requested: 1
-      sharedMemoryMB: 1024
-
   mounts:
     - type: project
       target: /project/
       description: project directory
-      options: rw
