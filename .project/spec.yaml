@@ -34,10 +34,6 @@ environment:
     labels:
       - cuda12.2
       - pytorch2.1
-    programming_languages:
-      - python3
-    package_managers:
-      - pip
 
   variables:
     NVIDIA_API_KEY:
